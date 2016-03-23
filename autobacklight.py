@@ -7,7 +7,7 @@ import time
 # Indicates the directory in your system where are the files that actually controls the backlight.
 # Usually, it is "/sys/class/backlight/something"
 # The directory must have the files "brightness" and "max_brightness" inside it.
-SYS_PATH = ""
+SYS_PATH = "/sys/class/backlight/acpi_video0"
 
 # Constants that adjust the relation between the ambient light level and the backlight level
 # Should be modified until the user get comfortable with the backlight and the changes
@@ -23,8 +23,7 @@ FREQUENCY = 60
 
 # Set the maximum number of steps from the minimum to the maximum value of brightness
 # It's useful to avoid constantly little changes
-# TODO
-MAX_STEPS = 10
+MAX_STEPS = 6
 
 def main(argv):
 
@@ -36,9 +35,12 @@ def main(argv):
 		MAX_VALUE = int(open(SYS_PATH + "max_brightness", 'r').read())
 		BRIGHTNESS_FILE = open(SYS_PATH + "brightness", 'w')
 
+		global MAX_STEPS
+		if (MAX_STEPS > MAX_VALUE): MAX_STEPS = MAX_VALUE
+
 		while True:
 			ambLight = getAmbientLightLevel()
-			backLight = int(ambLight*GAIN*MAX_VALUE/100 + BASE_LINE)
+			backLight = int(int((ambLight*GAIN*MAX_VALUE/100 + BASE_LINE)*MAX_STEPS/MAX_VALUE)*(MAX_VALUE/MAX_STEPS))
 			if (backLight < 0): backLight = 0
 			BRIGHTNESS_FILE.write(str(backLight))
 			BRIGHTNESS_FILE.flush()
@@ -49,7 +51,7 @@ def main(argv):
 	else: # It's gonna use the command "xbacklight" privided by Xorg
 		while True:
 			ambLight = getAmbientLightLevel()
-			backLight = int(ambLight*GAIN + BASE_LINE)
+			backLight = int(int((ambLight*GAIN + BASE_LINE)*MAX_STEPS/100)*(100/MAX_STEPS))
 			call(["xbacklight", "-set", str(backLight)])
 			#Debug
 			print("AmbLight:\t"+str(ambLight)+"\nBackLight:\t"+str(backLight)+"\n")
