@@ -12,7 +12,7 @@ import time
 SYS_PATH = "/sys/class/backlight/acpi_video0"
 
 # Constants that adjust the relation between the ambient light level and the backlight level
-# Should be modified until the user get comfortable with the backlight and the changes
+# Should be modified until you get comfortable with the backlight changes
 #
 # You can think about these constants like the angular coefficient (slope) and the linear coeficient of a straight line equation
 # BackLight = AmbLight*GAIN + BASE_LINE (the AmbLight will be in a 0 to 1 scale)
