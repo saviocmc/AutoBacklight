@@ -9,7 +9,7 @@ import time
 # The directory must have the files "brightness" and "max_brightness" inside it.
 #
 # This variable is optional if the command 'xbacklight' (by Xorg) works in your computer
-SYS_PATH = "/sys/class/backlight/acpi_video0"
+SYS_PATH = ""
 
 # Constants that adjust the relation between the ambient light level and the backlight level
 # Should be modified until you get comfortable with the backlight changes
