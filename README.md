@@ -43,9 +43,9 @@ sudo mkdir /opt/autobacklight
 sudo cp autobacklight.py /opt/autobacklight/autobacklight.py
 ```
 
-This should work fine if you are using *xbacklight*.
+Now, it should start in background on the next login. This works fine if you are using *xbacklight*.
 
-If you are not, theres no a good way to make it start at login. One solution is to change the Exec line of autobacklight.desktop to `sudo /opt/autobacklight/autobacklight.py &`, then make the file executable with `sudo chmod +x /opt/autobacklight/autobacklight.py` and finaly add the line `USERNAME ALL = NOPASSWD: /opt/autobacklight/autobacklight.py` to the */etc/sudoers* file (use `sudo visudo` for that). Replace USERNAME by you user name.
+If you are not (and had set the SYS_PATH), theres no a good way to make it start at login. One solution is to change the Exec line of autobacklight.desktop to `sudo /opt/autobacklight/autobacklight.py &`, then make the file executable with `sudo chmod +x /opt/autobacklight/autobacklight.py` and finaly add the line `USERNAME ALL = NOPASSWD: /opt/autobacklight/autobacklight.py` to the */etc/sudoers* file (use `sudo visudo` for that). Replace USERNAME by you user name.
 
 It works, but I do not recommend messing up with your */etc/sudoers* file unless you know what you're doing.
 
