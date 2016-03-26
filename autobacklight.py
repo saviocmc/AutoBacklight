@@ -41,6 +41,8 @@ def main(argv):
 		global MAX_STEPS
 		if (MAX_STEPS > MAX_VALUE): MAX_STEPS = MAX_VALUE
 
+		print("\nThe MAX VALUE is "+str(MAX_VALUE)+"\n")
+
 		while True:
 			ambLight = sensor.getAmbientLightLevel()
 			backLight = int(round(round((ambLight*GAIN + BASE_LINE)*MAX_STEPS)*(MAX_VALUE/MAX_STEPS)))
@@ -54,6 +56,7 @@ def main(argv):
 	else: # It's gonna use the command "xbacklight" privided by Xorg
 		global MAX_VALUE
 		MAX_VALUE = 100
+		print("\nThe MAX VALUE is 100\n")
 		while True:
 			ambLight = sensor.getAmbientLightLevel()
 			backLight = round((ambLight*GAIN + BASE_LINE)*MAX_STEPS)*(MAX_VALUE/MAX_STEPS)
@@ -74,7 +77,7 @@ class AmbientLightSensor(object):
 		self.image_height = camera.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT)
 
 	def getAmbientLightLevel(self):
-		"""	Returns the luminosity level in the ambient	in a scale of 0 to 1 """
+		"""	Returns the luminosity level in the ambient in a scale of 0 to 1	"""
 
 		# TODO Need to find a way around it
 		# This, for now, is needed to avoid the built-in auto-adjustment of brightness of the camera
