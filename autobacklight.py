@@ -73,8 +73,8 @@ class AmbientLightSensor(object):
 	def __init__(self, camera):
 		super(AmbientLightSensor, self).__init__()
 		self.camera = camera
-		self.image_width = camera.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH)
-		self.image_height = camera.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT)
+		self.image_width = camera.get(cv2.CAP_PROP_FRAME_WIDTH)
+		self.image_height = camera.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
 	def getAmbientLightLevel(self):
 		"""	Returns the luminosity level in the ambient in a scale of 0 to 1	"""
