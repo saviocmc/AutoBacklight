@@ -93,7 +93,7 @@ class AmbientLightSensor(object):
 
 		# Get the central row of the image, which will be analyzed
 		# Experimentally, I concluded that one row is sufficient to estimate the light intensity. Analysing the whole image is a waste of CPU power.
-		centralRow = image[self.image_height/2]
+		centralRow = image[int(self.image_height/2)]
 		for pixel in centralRow:
 			# In the HSV color space, the Intensity of a color (or a pixel), is giving by the max RGB value.
 			# https://en.wikipedia.org/wiki/HSL_and_HSV
