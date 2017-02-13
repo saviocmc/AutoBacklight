@@ -32,8 +32,8 @@ def main(argv):
 	# Creates a AmbientLightSensor with the default system camera (for laptops, it's Usually the built-in camera)
 	sensor = AmbientLightSensor(cv2.VideoCapture(0))
 
+	global SYS_PATH
 	if (len(SYS_PATH) > 0): # It's gonna use the system file 'brightness' under SYS_PATH to control the backlight
-		global SYS_PATH
 		if(not SYS_PATH.endswith("/")): SYS_PATH += "/"
 		MAX_VALUE = int(open(SYS_PATH + "max_brightness", 'r').read())
 		BRIGHTNESS_FILE = open(SYS_PATH + "brightness", 'w')
@@ -54,7 +54,6 @@ def main(argv):
 			time.sleep(60/FREQUENCY)
 
 	else: # It's gonna use the command "xbacklight" privided by Xorg
-		global MAX_VALUE
 		MAX_VALUE = 100
 		print("\nThe MAX VALUE is 100\n")
 		while True:
