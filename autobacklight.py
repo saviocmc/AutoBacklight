@@ -27,10 +27,10 @@ FREQUENCY = 60
 # It's useful to avoid constantly little changes
 MAX_STEPS = 10
 
-def main(argv):
+def main(argv, camera):
 
-	# Creates a AmbientLightSensor with the default system camera (for laptops, it's Usually the built-in camera)
-	sensor = AmbientLightSensor(cv2.VideoCapture(0))
+	# Creates a AmbientLightSensor with the given camera reference
+	sensor = AmbientLightSensor(camera)
 
 	global SYS_PATH
 	if (len(SYS_PATH) > 0): # It's gonna use the system file 'brightness' under SYS_PATH to control the backlight
@@ -108,4 +108,14 @@ class AmbientLightSensor(object):
 		return  lightIntensity
 
 if __name__ == '__main__':
-	main(sys.argv)
+
+	# Creates a AmbientLightSensor with the default system camera (for laptops, it's Usually the built-in camera)
+	camera = cv2.VideoCapture(0)
+
+	try:
+		main(sys.argv, camera)
+
+	except KeyboardInterrupt:
+		print("\n\nStopping...\n\nReleasing camera...")
+		camera.release()
+		print("\nStoped.\n")
