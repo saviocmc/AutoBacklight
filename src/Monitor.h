@@ -1,7 +1,7 @@
 #ifndef MONITOR_H
 #define MONITOR_H
 
-#include <iostream>
+#include <string>
 #include <vector>
 
 using namespace std;
