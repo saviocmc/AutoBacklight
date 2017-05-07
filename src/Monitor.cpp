@@ -54,8 +54,8 @@ bool Monitor::increaseBacklight(double increment) {
         return setBacklight(getBacklight() + increment);
     } else {
         #ifdef DEBUG
-        cout << "ERROR: The minimum increment or decrement value to make any difference is " << _margin_of_error << endl;
-        cout << "Value of passed was " << increment << endl << endl;
+        cout << "ERROR: The minimum value of increment or decrement to make any difference is" << _margin_of_error << endl;
+        cout << "Value passed was " << increment << endl << endl;
         #endif
         return false;
     }
